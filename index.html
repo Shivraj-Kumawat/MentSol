@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    
+    <!-- Google Fonts - Preconnect for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Non-render-blocking font loading -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+    
+    <title>MentSol - Learn from the ones who've lived it</title>
+    <meta name="description" content="Connect with 1000+ verified mentors for personalized guidance. JEE, NEET, Career, Mental Health & Life Coaching. Mindful solutions for mindful growth." />
+    <meta name="author" content="MentSol" />
+    <meta name="keywords" content="mentorship, online mentors, JEE coaching, NEET guidance, career counseling, college admission, life coaching, mental health support" />
+
+    <meta property="og:title" content="MentSol - Mindful Solutions for Mindful Growth" />
+    <meta property="og:description" content="Learn from expert mentors who've lived it. 1000+ verified mentors across 50+ categories. Transform your future today." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/favicon.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Lovable" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    
+    
+    <!-- Unload Event Shim: Replaces deprecated unload with pagehide + Telemetry Helper -->
+    <script>
+/* head-shim.js — put before vendor scripts */
+(function(){
+  if(!('addEventListener' in window) || !('EventTarget' in window)) return;
+
+  // ---- shim unload listeners to pagehide+visibilitychange ----
+  const origAdd = EventTarget.prototype.addEventListener;
+  const origRemove = EventTarget.prototype.removeEventListener;
+  const handlerMap = new WeakMap();
+
+  function makeWrappers(handler){
+    const pagehideWrap = function(e){ try{ handler.call(this,e); } catch(err){ console.error('[shim]',err); }};
+    const visWrap = function(e){ if(document.visibilityState === 'hidden'){ try{ handler.call(this,e); } catch(err){ console.error('[shim]',err); } } };
+    return {pagehide: pagehideWrap, visibility: visWrap};
+  }
+
+  EventTarget.prototype.addEventListener = function(type, handler, opts){
+    if(type === 'unload'){
+      const wrappers = makeWrappers(handler);
+      let arr = handlerMap.get(this);
+      if(!arr){ arr = new Map(); handlerMap.set(this, arr); }
+      arr.set(handler, wrappers);
+      origAdd.call(this, 'pagehide', wrappers.pagehide, opts);
+      origAdd.call(this, 'visibilitychange', wrappers.visibility, opts);
+      console.debug('[shim] replaced addEventListener("unload") with pagehide+visibilitychange');
+      return;
+    }
+    return origAdd.call(this, type, handler, opts);
+  };
+
+  EventTarget.prototype.removeEventListener = function(type, handler, opts){
+    if(type === 'unload'){
+      const arr = handlerMap.get(this);
+      if(arr && arr.has(handler)){
+        const w = arr.get(handler);
+        origRemove.call(this, 'pagehide', w.pagehide, opts);
+        origRemove.call(this, 'visibilitychange', w.visibility, opts);
+        arr.delete(handler);
+        if(arr.size === 0) handlerMap.delete(this);
+        return;
+      }
+    }
+    return origRemove.call(this, type, handler, opts);
+  };
+
+  // ---- helper to send telemetry safely on hide ----
+  window.sendOnHide = function(url, data){
+    try{
+      const payload = typeof data === 'string' ? data : JSON.stringify(data);
+      if(navigator.sendBeacon){
+        const blob = new Blob([payload], { type: 'application/json' });
+        navigator.sendBeacon(url, blob);
+      } else {
+        // keepalive fetch fallback
+        fetch(url, { 
+          method: 'POST', 
+          body: payload, 
+          headers: {'Content-Type':'application/json'}, 
+          keepalive: true 
+        }).catch(()=>{/* swallow */});
+      }
+    }catch(e){
+      console.warn('[shim] sendOnHide failed', e);
+    }
+  };
+
+  console.debug('[shim] unload → pagehide shim + sendOnHide helper initialized');
+})();
+    </script>
+
+    <!-- Lovable Fix V3: Minified page hardening script -->
+    <!-- 
+      Protects against token leakage in URLs, iframes, forms, and outgoing requests.
+      Extended token support: __lovable_token, token, access_token, auth, jwt, id_token
+      New in V3: Removes unsupported iframe features (vr, ambient-light-sensor, battery)
+      
+      For trusted iframes that need allow-scripts + allow-same-origin:
+      <script>
+        window.LOVABLE_FIX_TRUSTED_IFRAME_IDS = ['trusted-iframe-id'];
+      </script>
+      
+      Or use data-lovable-id attribute:
+      <iframe data-lovable-id="trusted-embed" ...>
+    -->
+    <script>
+/* lovable-fix-v3.min.js - put in head BEFORE embeds */
+(function(){
+  try{
+    var TRUSTED_IFRAME_IDS = window.LOVABLE_FIX_TRUSTED_IFRAME_IDS || [];
+    var TOKENS = ['__lovable_token','token','access_token','auth','jwt','id_token'];
+    var BAD_FEATURES = ['vr','ambient-light-sensor','battery'];
+
+    function stripTokenFromUrl(u){
+      try{
+        var url = new URL(u, location.href);
+        var changed=false;
+        TOKENS.forEach(function(k){ if(url.searchParams.has(k)){ url.searchParams.delete(k); changed=true; }});
+        if(url.hash){
+          var h = url.hash.replace(/^#/,'');
+          var p = new URLSearchParams(h);
+          TOKENS.forEach(function(k){ if(p.has(k)){ p.delete(k); changed=true; }});
+          if(changed) url.hash = p.toString() ? '#'+p.toString() : '';
+        }
+        return changed ? url.toString() : u;
+      }catch(e){ return u; }
+    }
+
+    function removeBadAllowFeatures(str){
+      if(!str) return str;
+      try{
+        // split on semicolon/space/comma
+        var parts = String(str).split(/[,;]\s*| \s*/).filter(Boolean);
+        var keep = parts.filter(function(p){
+          var lower = p.toLowerCase().trim();
+          return BAD_FEATURES.indexOf(lower) === -1;
+        });
+        return keep.join('; ');
+      }catch(e){ return str; }
+    }
+
+    function scrubLocation(){
+      try{
+        var s = stripTokenFromUrl(location.href);
+        if(s !== location.href) history.replaceState({}, document.title, s);
+      }catch(e){}
+    }
+
+    function scrubElementHref(el, attr){
+      try{
+        var v = el.getAttribute(attr);
+        if(!v) return;
+        var nv = stripTokenFromUrl(v);
+        if(nv!==v){ el.setAttribute(attr,nv); console.debug('[lovable-fix] scrubbed',attr,el); }
+      }catch(e){}
+    }
+
+    function scrubIframe(iframe){
+      try{
+        // scrub src token
+        scrubElementHref(iframe,'src');
+
+        // scrub allow attribute features
+        var allow = iframe.getAttribute('allow');
+        var newAllow = removeBadAllowFeatures(allow);
+        if(newAllow !== allow){
+          if(newAllow) iframe.setAttribute('allow', newAllow);
+          else iframe.removeAttribute('allow');
+          console.debug('[lovable-fix] removed unsupported allow features from iframe', iframe);
+        }
+
+        // fix sandbox: if both allow-scripts and allow-same-origin => remove same-origin unless trusted
+        var id = iframe.id || iframe.getAttribute('data-lovable-id') || '';
+        var sandbox = iframe.getAttribute('sandbox');
+        if(sandbox && sandbox.indexOf('allow-scripts')>-1 && sandbox.indexOf('allow-same-origin')>-1){
+          if(TRUSTED_IFRAME_IDS.indexOf(id) === -1){
+            var parts = sandbox.split(/\s+/).filter(Boolean).filter(function(p){ return p!=='allow-same-origin'; });
+            iframe.setAttribute('sandbox', parts.join(' '));
+            console.debug('[lovable-fix] removed allow-same-origin from iframe sandbox', iframe);
+          } else {
+            console.debug('[lovable-fix] trusted iframe allowed to keep sandbox flags', id);
+          }
+        }
+      }catch(e){}
+    }
+
+    // Patch fetch
+    var _fetch = window.fetch;
+    if(_fetch){
+      window.fetch = function(input, init){
+        try{
+          if(typeof input === 'string' || input instanceof URL) input = stripTokenFromUrl(input.toString());
+          else if(input && input.url) input.url = stripTokenFromUrl(input.url);
+        }catch(e){}
+        return _fetch.apply(this, arguments);
+      };
+    }
+
+    // Patch XHR.open
+    var _open = XMLHttpRequest && XMLHttpRequest.prototype && XMLHttpRequest.prototype.open;
+    if(_open){
+      XMLHttpRequest.prototype.open = function(method, url){
+        try{ url = stripTokenFromUrl(url); }catch(e){}
+        return _open.apply(this, [method, url].concat(Array.prototype.slice.call(arguments,2)));
+      };
+    }
+
+    // Patch window.open
+    var _openWin = window.open;
+    window.open = function(url){
+      try{ url = stripTokenFromUrl(url); }catch(e){}
+      return _openWin.apply(this, arguments);
+    };
+
+    // Remove meta/permission policy tags that contain bad features (best-effort)
+    function removeBadMetaPermissions(){
+      try{
+        var metas = document.querySelectorAll('meta[http-equiv], meta[name]');
+        metas.forEach(function(m){
+          var content = (m.getAttribute('content')||'').toLowerCase();
+          if(BAD_FEATURES.some(function(f){ return content.indexOf(f)!==-1; })){
+            m.parentNode && m.parentNode.removeChild(m);
+            console.debug('[lovable-fix] removed meta permission containing bad feature', m);
+          }
+        });
+      }catch(e){}
+    }
+
+    function scrubAll(){
+      try{
+        document.querySelectorAll('a[href]').forEach(function(a){ scrubElementHref(a,'href'); });
+        document.querySelectorAll('form[action]').forEach(function(f){ scrubElementHref(f,'action'); });
+        document.querySelectorAll('iframe[src]').forEach(function(iframe){ scrubIframe(iframe); });
+        removeBadMetaPermissions();
+      }catch(e){}
+    }
+
+    if(document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', function(){ scrubLocation(); scrubAll(); });
+    } else { scrubLocation(); scrubAll(); }
+
+    // Observe mutations
+    var mo = new MutationObserver(function(muts){
+      muts.forEach(function(m){
+        if(m.addedNodes) Array.from(m.addedNodes).forEach(function(n){
+          if(n.nodeType!==1) return;
+          if(n.matches && n.matches('iframe[src]')) scrubIframe(n);
+          if(n.matches && n.matches('a[href]')) scrubElementHref(n,'href');
+          if(n.matches && n.matches('form[action]')) scrubElementHref(n,'action');
+          if(n.querySelectorAll) {
+            n.querySelectorAll('iframe[src],a[href],form[action]').forEach(function(el){
+              if(el.tagName==='IFRAME') scrubIframe(el);
+              else if(el.tagName==='A') scrubElementHref(el,'href');
+              else if(el.tagName==='FORM') scrubElementHref(el,'action');
+            });
+          }
+        });
+      });
+    });
+    mo.observe(document.documentElement || document, {childList:true, subtree:true});
+
+    window.LOVABLE_FIX = {
+      stripTokenFromUrl: stripTokenFromUrl,
+      scrubAll: scrubAll,
+      removeBadAllowFeatures: removeBadAllowFeatures,
+      version: '3.0'
+    };
+
+    console.debug('[lovable-fix] v3 initialized');
+  }catch(err){
+    console.error('[lovable-fix] init error', err);
+  }
+})();
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

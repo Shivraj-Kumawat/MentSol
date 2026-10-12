@@ -1,0 +1,58 @@
+project_id = "rutxafzivumqnyxqtdsa"
+
+[functions.referral-click]
+verify_jwt = false
+
+[functions.attribute-referral]
+verify_jwt = false
+
+[functions.complete-signup]
+verify_jwt = false
+
+[functions.check-phone-exists]
+verify_jwt = false
+
+[functions.ai-support-chat]
+verify_jwt = true
+
+[functions.send-mentor-verification-email]
+verify_jwt = true
+
+[functions.verify-mentor-action]
+verify_jwt = false
+
+[functions.manage-session-reschedule]
+verify_jwt = true
+
+[functions.create-razorpay-order]
+verify_jwt = true
+
+[functions.verify-razorpay-payment]
+verify_jwt = false
+
+[functions.cleanup-failed-payment]
+verify_jwt = true
+
+[functions.cleanup-expired-holds]
+verify_jwt = false
+
+[functions.razorpay-webhook]
+verify_jwt = false
+
+[functions.check-payment-status]
+verify_jwt = true
+
+[functions.delete-user-account]
+verify_jwt = true
+
+[functions.send-auth-email]
+verify_jwt = false
+
+[functions.admin-delete-user]
+verify_jwt = true
+
+[functions.send-signup-otp]
+verify_jwt = false
+
+[functions.verify-signup-otp]
+verify_jwt = false

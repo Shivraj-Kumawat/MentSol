@@ -1,0 +1,16 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "app.lovable.9c6d35476c0641538b16b9dd6cd14714",
+        "paths": [
+          "/auth/callback",
+          "/auth/*",
+          "/profile-completion",
+          "/*"
+        ]
+      }
+    ]
+  }
+}

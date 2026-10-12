@@ -1,0 +1,1 @@
+ALTER TABLE public.sessions ADD COLUMN IF NOT EXISTS payment_status_confirmed boolean NOT NULL DEFAULT false;

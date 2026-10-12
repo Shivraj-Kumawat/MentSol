@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.mentsol.mentsol",
+      "sha256_cert_fingerprints": [
+        "EA:FD:78:44:45:C5:37:A1:4F:7B:A0:CC:60:D1:9B:92:F5:32:3D:0C:AB:3B:1C:93:DB:56:90:8B:01:BD:77:50"
+      ]
+    }
+  }
+]
